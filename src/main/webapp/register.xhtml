@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:t="http://java.sun.com/jsf/composite/reusable"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+    <title>New Customer</title>
+    <h:outputStylesheet name="navbar.css" library="css"/>
+    <h:outputStylesheet name="form.css" library="css"/>
+</h:head>
+
+<h:body>
+    <p:growl id="idgrowl" life="2000"/>
+    <t:navbar></t:navbar>
+
+    <div class="wrapper">
+        <h2>Register Form</h2>
+        <h:form class="form">
+            <div class="row">
+                <div class="col">
+                    <h:outputText class="label" value="Username:"/>
+                    <h:inputText class="input" id="usernameInputText"
+                                 value="#{customerBean.username}">
+                    </h:inputText>
+                    <h:message class="message" id="usernameMessage" for="usernameInputText"/>
+                </div>
+
+                <div class="col">
+                    <h:outputText class="label" value="Full Name:"/>
+                    <h:inputText class="input" id="fullnameInputText" required="true"
+                                 requiredMessage="Required!"
+                                 value="#{customerBean.fullName}">
+                    </h:inputText>
+                    <h:message class="message" id="fullNameMessage" for="fullnameInputText"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <h:outputText class="label" value="E-mail:"/>
+                    <h:inputText class="input" id="emailInputText" required="true"
+                                 requiredMessage="Required!"
+                                 value="#{customerBean.email}">
+                    </h:inputText>
+                    <h:message class="message" id="emailMessage" for="emailInputText"/>
+                </div>
+
+                <div class="col">
+                    <h:outputText class="label" value="Password:"/>
+                    <h:inputSecret class="input" id="passwordInputSecret" required="true"
+                                   requiredMessage="Required!"
+                                   value="#{customerBean.password}">
+                    </h:inputSecret>
+                    <h:message class="message" id="passwordMessage" for="passwordInputSecret"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <h:outputText class="label" value="Birthday:"/>
+                    <p:calendar id="birthdayInput" inputStyleClass="dateInput" mode="popup" pattern="yyyy-MM-dd"
+                                autocomplete="off" value="#{customerBean.birthday}"/>
+                    <h:message class="message" id="birthdayInputMessage" for="birthdayInput"/>
+                </div>
+
+                <div class="col">
+                    <h:outputText class="label" value="Gender:"/>
+                    <h:selectOneMenu class="input" id="genderInput" rendered="true"
+                                     requiredMessage="Required!"
+                                     value="#{customerBean.gender}">
+                        <f:selectItem itemValue="M" itemLabel="Male"/>
+                        <f:selectItem itemValue="F" itemLabel="Female"/>
+                    </h:selectOneMenu>
+                    <h:message class="message" id="genderInputMessage" for="genderInput"/>
+                </div>
+            </div>
+
+            <h:panelGrid class="grid" columns="2">
+                <h:commandButton update="idgrowl" class="button-active button"
+                                 action="#{customerBean.createCustomer()}" value="Create">
+                    <f:ajax execute="fullnameInputText emailInputText passwordInputSecret birthdayInput genderInput usernameInputText"
+                            render="fullNameMessage emailMessage passwordMessage birthdayInputMessage genderInputMessage usernameMessage"/>
+                </h:commandButton>
+                <h:button class="button" outcome="/home.xhtml" value="Cancel"/>
+            </h:panelGrid>
+
+        </h:form>
+    </div>
+</h:body>
+</html>

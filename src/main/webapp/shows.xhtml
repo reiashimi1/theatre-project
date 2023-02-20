@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:t="http://java.sun.com/jsf/composite/reusable">
+
+<h:head>
+    <title>Shows</title>
+    <h:outputStylesheet name="navbar.css" library="css"/>
+    <h:outputStylesheet name="filter.css" library="css"/>
+</h:head>
+
+<h:body>
+    <p:growl id="idgrowl" life="2000"/>
+    <t:navbar/>
+    <h:form>
+        <h2 class="title">SHOWS</h2>
+
+        <p:commandButton style="display: flex; justify-items: end; margin-right: 10px; margin-bottom: 10px"
+                         action="#{showBean.prepareReservation()}" value="Reserve seat"/>
+
+        <p:dataTable id="shows" var="show" value="#{showBean.allShows}"
+                     paginator="true" rows="10"
+                     style="margin-left: 10px; margin-right: 10px;"
+                     resizableColumns="true"
+                     selection="#{showBean.show}" rowKey="#{show.showid}"
+
+                     paginatorTemplate="{CurrentPageReport} {FirstPageLink}
+                             {PreviousPageLink} {PageLinks} {NextPageLink}
+                             {LastPageLink} {RowsPerPageDropdown}"
+                     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                     paginatorPosition="bottom"
+                     rowsPerPageTemplate="5,10,15,20,30,40,50">
+
+            <p:column headerText="Select" selectionMode="single" width="30px; text-align:center"/>
+
+            <p:column headerText="Play">
+                <h:outputText value="#{show.play.title}"/>
+            </p:column>
+
+            <p:column headerText="Hall">
+                <h:outputText value="#{show.hall.name}"/>
+            </p:column>
+
+            <p:column headerText="Date">
+                <h:outputText value="#{show.showdate.toGMTString()}"/>
+            </p:column>
+
+            <p:column headerText="Total seats">
+                <h:outputText value="#{show.hall.totalseats}"/>
+            </p:column>
+
+            <p:column headerText="Seats occupied">
+                <h:outputText value="#{show.occupiedSeats}"/>
+            </p:column>
+
+            <p:column headerText="Free seats">
+                <h:outputText value="#{show.freeSeats}"/>
+            </p:column>
+        </p:dataTable>
+    </h:form>
+</h:body>
+</html>

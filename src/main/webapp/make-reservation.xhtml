@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:t="http://java.sun.com/jsf/composite/reusable">
+
+<h:head>
+    <title>New reservation</title>
+    <h:outputStylesheet name="navbar.css" library="css"/>
+    <h:outputStylesheet name="form.css" library="css"/>
+</h:head>
+
+<h:body>
+    <p:growl id="idgrowl" life="2000"/>
+    <t:navbar></t:navbar>
+
+    <div class="wrapper">
+
+        <h:form class="form">
+            <div class="row">
+                <div class="col">
+                    <h:outputText class="label" value="Play:"/>
+                    <h:inputText class="input" id="play" disabled="true"
+                                 value="#{showBean.show.play.title}">
+                    </h:inputText>
+                </div>
+
+                <div class="col">
+                    <h:outputText class="label" value="Hall:"/>
+                    <h:inputText class="input" id="hall" disabled="true"
+                                 value="#{showBean.show.hall.name}">
+                    </h:inputText>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <h:outputText class="label" value="Date:"/>
+                    <h:inputText class="input" id="date" disabled="true"
+                                 value="#{showBean.show.showdate}">
+                    </h:inputText>
+                </div>
+
+                <div class="col">
+                    <h:outputText class="label" value="Free seats:"/>
+                    <h:inputText class="input" id="freeSeats" disabled="true"
+                                 value="#{showBean.show.freeSeats}">
+                    </h:inputText>
+                </div>
+            </div>
+            <div class="row" style="justify-content: center; align-items: center;">
+                <h:outputText class="label" value="Number of seats:"/>
+                <h:selectOneMenu class="input" id="seatsInput" rendered="true"
+                                 requiredMessage="Required!"
+                                 value="#{reservationBean.seats}">
+                    <f:selectItem itemValue="#{1}" itemLabel="1"/>
+                    <f:selectItem itemValue="#{2}" itemLabel="2"/>
+                    <f:selectItem itemValue="#{3}" itemLabel="3"/>
+                    <f:selectItem itemValue="#{4}" itemLabel="4"/>
+                    <f:selectItem itemValue="#{5}" itemLabel="5"/>
+                </h:selectOneMenu>
+                <h:message class="message" id="seatsInputMessage" for="seatsInput"/>
+            </div>
+
+            <h:panelGrid class="grid" columns="2" style="margin-top: 10px;">
+                <h:commandButton update="idgrowl" class="button-active button"
+                                 action="#{reservationBean.makeReservation()}" value="Make reservation">
+                    <f:ajax execute="play hall date freeSeats seatsInput" render="seatsInputMessage"/>
+                </h:commandButton>
+                <h:button class="button" outcome="/shows.xhtml" value="Cancel"/>
+            </h:panelGrid>
+
+        </h:form>
+    </div>
+</h:body>
+</html>

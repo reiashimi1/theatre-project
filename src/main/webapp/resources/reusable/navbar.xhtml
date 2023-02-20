@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:cc="http://java.sun.com/jsf/composite">
+
+<h:head>
+    <h:outputStylesheet name="navbar.css" library="css"/>
+</h:head>
+<h:body>
+
+    <cc:interface></cc:interface>
+    <p:growl id="idgrowl" life="2000"/>
+
+    <cc:implementation>
+        <h:form>
+            <div class="header">
+                <h1 class="logo"><h:outputLink class="link" value="home.xhtml">Theatre</h:outputLink></h1>
+                <ul class="main-nav">
+                    <li><h:outputLink class="link" value="home.xhtml">Home</h:outputLink></li>
+                    <li><h:outputLink class="link" value="profile.xhtml" rendered="#{customerBean.hasCurrentCustomer()}"
+                                      disabled="#{!customerBean.hasCurrentCustomer()}">
+                        <h:outputText value="Profile" rendered="#{customerBean.hasCurrentCustomer()}"/>
+                    </h:outputLink></li>
+                    <li><h:outputLink class="link" value="login.xhtml"
+                                      rendered="#{!customerBean.hasCurrentCustomer()}">Log in</h:outputLink></li>
+                    <li><h:commandLink class="link" action="#{customerBean.logout()}" update="idgrowl"
+                                       rendered="#{customerBean.hasCurrentCustomer()}">Log out</h:commandLink></li>
+                    <li><h:outputLink class="link" value="register.xhtml">Register</h:outputLink></li>
+                </ul>
+            </div>
+            <div style="background: #c4c4c4 -webkit-gradient(linear,left top,left bottom,from(rgba(255,255,255,0.8)),to(rgba(255,255,255,0)));
+          text-align: center; padding: 10px;">
+                <p:commandButton action="plays.xhtml" value="View plays"/>
+                <p:commandButton action="shows.xhtml" value="View shows"/>
+                <p:commandButton rendered="#{customerBean.hasCurrentCustomer()}"
+                                 action="reservations.xhtml" value="View reservations"/>
+            </div>
+        </h:form>
+
+    </cc:implementation>
+</h:body>
+</html>

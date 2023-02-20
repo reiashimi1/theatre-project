@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:t="http://java.sun.com/jsf/composite/reusable">
+
+<h:head>
+    <title>Log in</title>
+    <h:outputStylesheet name="navbar.css" library="css"/>
+    <h:outputStylesheet name="form.css" library="css"/>
+</h:head>
+<h:body>
+    <p:growl id="idgrowl" life="2000"/>
+    <t:navbar></t:navbar>
+
+    <div class="wrapper">
+        <h2>Log in</h2>
+        <h:form class="form">
+            <div>
+                <div class="row">
+                    <div class="col">
+                        <h:outputText class="label" value="Username:"/>
+                        <h:inputText class="input" id="usernameInputText"
+                                     required="true"
+                                     requiredMessage="Please enter a valid username"
+                                     value="#{customerBean.username}">
+                        </h:inputText>
+                        <h:message errorClass="message" id="usernameMessage" for="usernameInputText"/>
+                    </div>
+
+                    <div class="col">
+                        <h:outputText class="label" value="Password:"/>
+                        <h:inputSecret class="input" id="passwordInputSecret"
+                                       required="true"
+                                       requiredMessage="Please enter your password"
+                                       value="#{customerBean.password}">
+                        </h:inputSecret>
+                        <h:message errorClass="message" id="passwordMessage" for="passwordInputSecret"/>
+                    </div>
+                </div>
+
+                <h:panelGrid class="grid" columns="2">
+                    <h:commandButton update="idgrowl" class="button-active button" action="#{customerBean.login()}"
+                                     value="Submit">
+                        <f:ajax execute="usernameInputText passwordInputSecret"
+                                render="usernameMessage passwordMessage"/>
+                    </h:commandButton>
+                    <h:button class="button" outcome="/home.xhtml" value="Cancel"/>
+                </h:panelGrid>
+            </div>
+        </h:form>
+    </div>
+</h:body>
+</html>

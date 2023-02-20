@@ -1,0 +1,127 @@
+.wrapper {
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+.form {
+    font-family: 'Montserrat', sans-serif;
+    max-width: 500px;
+    padding: 15px 35px 25px;
+    margin: 0 auto;
+    background-color: #9e7373;
+
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+    position: center;
+}
+
+.form-record {
+    font-family: 'Montserrat', sans-serif;
+    max-width: 520px;
+    padding: 15px 35px 25px;
+    margin: 0 auto;
+    background-color: rgba(113, 141, 170, 0.62);
+}
+
+.button {
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    font-size: 14px;
+
+    width: 100%;
+    margin-bottom: 4px;
+    position: center;
+
+    transition-duration: 0.4s;
+    padding: 5px 20px;
+
+    background-color: white;
+    color: #a31010;
+    border: 1px solid #a31010;
+}
+
+.button-active {
+    cursor: pointer;
+    background-color: #a31010;
+    color: white;
+}
+
+.input {
+    font-family: 'Montserrat', sans-serif;
+    margin-left: 10px;
+    color: #34495e;
+    display: flex;
+    flex: 1 1 0%;
+    font-size: 12px;
+    padding: 5px;
+    display: flex;
+    justify-content: start;
+}
+
+.dateInput {
+    margin-left: 10px !important;
+    width: 160px;
+    height: 28px;
+    padding: 5px;
+    font-weight: normal;
+    -webkit-border-radius: 0 !important;
+    -webkit-box-shadow: unset !important;
+    border: 1px solid #34495e;
+}
+
+.input:disabled {
+    color: white;
+    background-color: rgba(113, 141, 170, 0.08);
+}
+
+h2 {
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    color: #a31010;
+    font-size: 30px;
+    text-align: center;
+    margin-bottom: 0;
+    font-weight: bolder;
+}
+
+.label {
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    flex: 1 1 0%;
+    text-transform: uppercase;
+    color: white;
+    margin-left: 5px;
+}
+
+td:first-child {
+    vertical-align: bottom;
+}
+
+/*.grid {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    margin-top: 30px;*/
+/*    position: center;*/
+/*}*/
+
+.row {
+    display: flex;
+    flex: 1 1 0%;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.col {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.message {
+    margin-top: 10px;
+    margin-left: 2px;
+    font-family: 'Montserrat', sans-serif;
+    color: #c20000;
+}

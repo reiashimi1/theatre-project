@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:t="http://java.sun.com/jsf/composite/reusable">
+
+<h:head>
+    <title>Plays</title>
+    <h:outputStylesheet name="navbar.css" library="css"/>
+    <h:outputStylesheet name="filter.css" library="css"/>
+
+</h:head>
+<h:body>
+    <p:growl id="idgrowl" life="2000"/>
+    <t:navbar/>
+    <h:form>
+        <h2 class="title">PLAYS</h2>
+
+        <p:dataTable id="plays" var="play" value="#{playBean.allPlays}"
+                     paginator="true" rows="10"
+                     resizableColumns="true"
+                     selection="#{playBean.play}" rowKey="#{play.playid}"
+
+                     paginatorTemplate="{CurrentPageReport} {FirstPageLink}
+                             {PreviousPageLink} {PageLinks} {NextPageLink}
+                             {LastPageLink} {RowsPerPageDropdown}"
+                     currentPageReportTemplate="{startRecord}-{endRecord} of {totalRecords} records"
+                     paginatorPosition="bottom"
+                     rowsPerPageTemplate="5,10,15,20,25,30,35,40,45,50">
+
+            <p:column headerText="Title">
+                <h:outputText value="#{play.title}"/>
+            </p:column>
+
+            <p:column headerText="Writer">
+                <h:outputText value="#{play.writer}"/>
+            </p:column>
+
+            <p:column headerText="Director">
+                <h:outputText value="#{play.director}"/>
+            </p:column>
+
+            <p:column headerText="Genre">
+                <h:outputText value="#{play.genre}"/>
+            </p:column>
+
+            <p:column headerText="Actors">
+                <h:outputText value="#{play.actorsString}"/>
+            </p:column>
+
+        </p:dataTable>
+    </h:form>
+</h:body>
+</html>
