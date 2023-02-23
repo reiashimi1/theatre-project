@@ -68,6 +68,10 @@ public class Show {
         this.seatsoccupied = seatsoccupied;
     }
 
+    public void occupySeats(BigInteger seats) {
+        this.seatsoccupied = seatsoccupied.add(seats);
+    }
+
     public String getOccupiedSeats() {
         if(seatsoccupied.intValue() < 1) {
             return "N/A";

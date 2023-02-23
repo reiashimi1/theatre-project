@@ -1,6 +1,7 @@
 package com.theatreproject.beans;
 
 import com.theatreproject.controllers.ReservationControllerImpl;
+import com.theatreproject.controllers.ShowControllerImpl;
 import com.theatreproject.models.Customer;
 import com.theatreproject.models.Reservation;
 import com.theatreproject.models.Show;
@@ -115,6 +116,8 @@ public class ReservationBean implements Serializable {
             ReservationControllerImpl.getInstance().store(reservation);
             loadList();
             new GrowlMessage().showInfo("Reservation done");
+            showBean.getShow().occupySeats(seats);
+            ShowControllerImpl.getInstance().update(showBean.getShow());
             showBean.setShow(null);
             return Routes.SHOWS.getUrl();
         } catch (Exception e) {

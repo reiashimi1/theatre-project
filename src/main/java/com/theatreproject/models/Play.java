@@ -33,6 +33,9 @@ public class Play {
     @OneToMany
     @JoinColumn
     private List<ActorPlay> actorPlays;
+    @OneToMany
+    @JoinColumn
+    private List<Show> shows;
 
     public BigInteger getPlayid() {
         return playid;
@@ -80,6 +83,14 @@ public class Play {
 
     public void setActorPlays(List<ActorPlay> actorPlays) {
         this.actorPlays = actorPlays;
+    }
+
+    public List<Show> getShows() {
+        return shows;
+    }
+
+    public void setShows(List<Show> shows) {
+        this.shows = shows;
     }
 
     public String getActorsString() {

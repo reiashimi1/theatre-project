@@ -23,9 +23,8 @@
 
         <p:dataTable id="halls" var="hall" value="#{hallBean.allHalls}"
                      paginator="true" rows="10"
-                     resizableColumns="true" liveResize="true" liveScroll="true"
+                     resizableColumns="true"
                      selection="#{hallBean.hall}" rowKey="#{hall.hallid}"
-                     style="table-layout: auto; overflow: scroll; display: flex; flex-direction: column"
                      paginatorTemplate="{CurrentPageReport} {FirstPageLink}
                              {PreviousPageLink} {PageLinks} {NextPageLink}
                              {LastPageLink} {RowsPerPageDropdown}"
@@ -49,7 +48,7 @@
                 <h:outputText value="#{hall.totalseats}"/>
             </p:column>
 
-            <p:column width="100px" style="display: flex; flex-wrap: wrap" headerText="Current shows">
+            <p:column headerText="Today shows">
                 <h:outputText value="#{hall.currentShows}"/>
             </p:column>
 
