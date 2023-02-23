@@ -32,6 +32,7 @@
       <option name="customHeaders">
         <set>
           <option value="username" />
+          <option value="password" />
         </set>
       </option>
     </inspection_tool>

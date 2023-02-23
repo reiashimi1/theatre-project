@@ -25,10 +25,10 @@ public class CustomerBean implements Serializable {
 
     public CustomerBean() {
         clearAttributes();
+        currentCustomer = null;
     }
 
     private void clearAttributes() {
-        currentCustomer = null;
         username = "";
         fullName = "";
         email = "";
@@ -100,6 +100,7 @@ public class CustomerBean implements Serializable {
     public String login() {
         try {
             currentCustomer = CustomerControllerImpl.getInstance().authenticate(username, password);
+            clearAttributes();
             new GrowlMessage().showInfo("Logged in successfully!");
             return Routes.HOME.getUrl();
         } catch (NoResultException e) {

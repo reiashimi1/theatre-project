@@ -1,3 +1,4 @@
+drop table users;
 drop table reservations;
 drop table shows;
 drop table actor_plays;
@@ -5,12 +6,18 @@ drop table actors;
 drop table customers;
 drop table plays;
 drop table halls;
-drop sequence user_sequence;
+drop sequence customer_sequence;
 drop sequence actor_sequence;
 drop sequence play_sequence;
 drop sequence hall_sequence;
 drop sequence shows_sequence;
 drop sequence reservation_sequence;
+
+-- B2B Authorized user
+CREATE SEQUENCE user_sequence start with 1000 increment by 1 minvalue 1000;
+CREATE TABLE users ( userId int PRIMARY KEY,
+                     username varchar(30) NOT NULL,
+                     password varchar(50) NOT NULL );
 
 -- Customer table
 create sequence customer_sequence start with 100 increment by 1 minvalue 100;
@@ -82,6 +89,7 @@ CREATE TABLE reservations (
                               CONSTRAINT FK_customerID FOREIGN KEY(customerID) REFERENCES customers(customerID)
 );
 
+INSERT INTO users values ('admin', 'admin');
 
 INSERT INTO customers values(customer_sequence.nextval, 'Klea', 'Klea Pregja', 'kleapregja@unyt.edu.al', '123', TO_DATE('2001-08-03', 'YYYY-MM-DD'), 'F');
 INSERT INTO customers values(customer_sequence.nextval, 'Rei', 'Rei Ashimi', 'reiashimi@unyt.edu.al', '321', TO_DATE('2001-05-30', 'YYYY-MM-DD'), 'M');
@@ -173,25 +181,20 @@ INSERT INTO actor_plays values(102, 106);
 INSERT INTO actor_plays values(118, 106);
 INSERT INTO actor_plays values(114, 107);
 INSERT INTO actor_plays values(110, 108);
--- select * from customers;
--- select * from halls;
---
--- select * from plays;
--- select * from plays join actor_plays on plays.playId = actor_plays.playId join actors on actor_plays.actorID = actors.actorID;
--- select * from actors join actor_plays on actors.actorId = actor_plays.actorId join plays on actor_plays.playId = plays.playID where plays.playId = 121;
---
--- select * from actors;
---
--- select * from shows;
--- select * from shows join halls on shows.hallID = halls.hallID;
---
--- select r.reservationID, c.username from reservations r join customers c on
+
+-- SELECT * FROM customers;
+-- SELECT * FROM halls;
+-- SELECT * FROM plays;
+-- SELECT * FROM plays join actor_plays on plays.playId = actor_plays.playId join actors on actor_plays.actorID = actors.actorID;
+-- SELECT * FROM actors join actor_plays on actors.actorId = actor_plays.actorId join plays on actor_plays.playId = plays.playID where plays.playId = 121;
+-- SELECT * FROM actors;
+-- SELECT * FROM shows;
+-- SELECT * FROM shows join halls on shows.hallID = halls.hallID;
+-- SELECT r.reservationID, c.username from reservations r join customers c on
 --         r.customerID = c.customerID;
---
--- select sh.SHOWID, (SELECT TITLE FROM PLAYS WHERE PLAYS.PLAYID = sh.PLAYID ) as PLAY,
+-- SELECT sh.SHOWID, (SELECT TITLE FROM PLAYS WHERE PLAYS.PLAYID = sh.PLAYID ) as PLAY,
 --        (SELECT NAME as "HALL" FROM HALLS WHERE HALLS.HALLID = sh.HALLID), SHOWDATE, SEATSOCCUPIED
 -- FROM SHOWS sh;
---
 -- SELECT * FROM reservations WHERE customerID = 101;
 
 commit;

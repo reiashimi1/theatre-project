@@ -103,7 +103,8 @@ public class ReservationBean implements Serializable {
             ReservationControllerImpl.getInstance().store(reservation);
             loadList();
             new GrowlMessage().showInfo("Reservation done");
-            return Routes.HOME.getUrl();
+            showBean.setShow(null);
+            return Routes.SHOWS.getUrl();
         } catch (Exception e) {
             new GrowlMessage().showInfo("Failed to Create!");
             return null;
