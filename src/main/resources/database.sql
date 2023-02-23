@@ -79,7 +79,7 @@ CREATE TABLE shows (
 );
 
 -- Reservation table
-CREATE SEQUENCE reservation_sequence start with 1 increment by 1;
+CREATE SEQUENCE reservation_sequence start with 1 increment by 1 minvalue 1;
 CREATE TABLE reservations (
                               reservationID int PRIMARY KEY,
                               showID int,
@@ -165,7 +165,9 @@ INSERT INTO shows values(shows_sequence.nextval, 108, 1, TO_DATE('2023-03-09 06:
 INSERT INTO shows values(shows_sequence.nextval, 108, 3, TO_DATE('2023-03-09 09:00 PM','YYYY-MM-DD HH:MI PM'),5);
 
 
-INSERT INTO reservations values(reservation_sequence.nextval, 1000, 100, 3);
+INSERT INTO reservations values(reservation_sequence.nextval, 1000, 101, 3);
+INSERT INTO reservations values(reservation_sequence.nextval, 1002, 100, 1);
+INSERT INTO reservations values(reservation_sequence.nextval, 1001, 100, 5);
 
 INSERT INTO actor_plays values(100, 100);
 INSERT INTO actor_plays values(101, 100);
@@ -189,6 +191,7 @@ INSERT INTO actor_plays values(110, 108);
 -- SELECT * FROM actors join actor_plays on actors.actorId = actor_plays.actorId join plays on actor_plays.playId = plays.playID where plays.playId = 121;
 -- SELECT * FROM actors;
 -- SELECT * FROM shows;
+-- SELECT * FROM reservations;
 -- SELECT * FROM shows join halls on shows.hallID = halls.hallID;
 -- SELECT r.reservationID, c.username from reservations r join customers c on
 --         r.customerID = c.customerID;

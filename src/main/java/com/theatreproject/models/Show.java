@@ -8,6 +8,7 @@ import java.util.Date;
 @Table(name = "SHOWS", schema = "REI")
 @NamedQueries({
         @NamedQuery(name = "Show.findAll", query = "SELECT s FROM Show s")
+        , @NamedQuery(name = "Show.findAllByDate", query = "SELECT s FROM Show s WHERE s.showdate = :filterDate")
 })
 public class Show {
     @GeneratedValue(strategy = GenerationType.IDENTITY)

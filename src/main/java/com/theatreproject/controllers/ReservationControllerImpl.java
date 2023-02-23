@@ -5,6 +5,7 @@ import com.theatreproject.models.Reservation;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -26,6 +27,10 @@ public class ReservationControllerImpl implements Controller<Reservation> {
 
     public ArrayList<Reservation> index(BigInteger customerId) {
         return convertToArrayList(DAOFactory.getReservationDAO().index(customerId));
+    }
+
+    public ArrayList<Reservation> index(BigInteger customerId, Date filterDate) {
+        return convertToArrayList(DAOFactory.getReservationDAO().index(customerId, filterDate));
     }
 
     public ArrayList<Reservation> indexCustomer(BigInteger customerId) {

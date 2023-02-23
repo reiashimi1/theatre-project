@@ -4,6 +4,7 @@ import com.theatreproject.dao.DAOFactory;
 import com.theatreproject.models.Show;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +23,10 @@ public class ShowControllerImpl implements Controller<Show>{
     @Override
     public ArrayList<Show> index() {
         return convertToArrayList(DAOFactory.getShowDAO().index());
+    }
+
+    public ArrayList<Show> index(Date filterDate) {
+        return convertToArrayList(DAOFactory.getShowDAO().index(filterDate));
     }
 
     @Override

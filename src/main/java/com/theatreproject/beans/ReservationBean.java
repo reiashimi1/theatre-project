@@ -13,6 +13,7 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
 import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 
 @ManagedBean
@@ -27,6 +28,7 @@ public class ReservationBean implements Serializable {
     private Show show;
     private Customer customer;
     private BigInteger seats;
+    private Date filterDate;
 
     public ReservationBean() {}
     @PostConstruct
@@ -46,6 +48,12 @@ public class ReservationBean implements Serializable {
 
     public void setShowBean(ShowBean showBean) {
         this.showBean = showBean;
+    }
+    public Date getFilterDate() {
+        return filterDate;
+    }
+    public void setFilterDate(Date filterDate) {
+        this.filterDate = filterDate;
     }
 
     public List<Reservation> getAllReservations() {
@@ -87,7 +95,11 @@ public class ReservationBean implements Serializable {
     }
 
     public void loadList() {
-        allReservations = ReservationControllerImpl.getInstance().index(customerBean.getCurrentCustomer().getCustomerid());
+        if (filterDate == null) {
+            allReservations = ReservationControllerImpl.getInstance().index(customerBean.getCurrentCustomer().getCustomerid());
+        } else {
+            allReservations = ReservationControllerImpl.getInstance().index(customerBean.getCurrentCustomer().getCustomerid(), filterDate);
+        }
     }
 
     public String makeReservation() {

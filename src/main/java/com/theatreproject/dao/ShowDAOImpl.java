@@ -2,9 +2,12 @@ package com.theatreproject.dao;
 
 import com.theatreproject.models.Show;
 import com.theatreproject.utils.EntityManagerProvider;
+import com.theatreproject.utils.Helpers;
 
 import javax.persistence.EntityManager;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ShowDAOImpl implements DAO<Show>{
 
@@ -13,6 +16,16 @@ public class ShowDAOImpl implements DAO<Show>{
         return EntityManagerProvider.getEntityManager()
                 .createNamedQuery("Show.findAll", Show.class)
                 .getResultList();
+    }
+
+    public List<Show> index(Date filterDate) {
+        return EntityManagerProvider.getEntityManager()
+                .createNamedQuery("Show.findAll", Show.class)
+                .getResultList()
+                .stream()
+                .filter((show -> Helpers.getInstance().getDateToString(show.getShowdate())
+                        .equals(Helpers.getInstance().getDateToString(filterDate))))
+                .collect(Collectors.toList());
     }
 
     @Override

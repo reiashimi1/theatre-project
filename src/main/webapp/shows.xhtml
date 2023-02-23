@@ -18,6 +18,15 @@
     <h:form>
         <h2 class="title">SHOWS</h2>
 
+        <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 10px">
+            <h:outputText value="Date:"/>
+            <p:calendar inputStyleClass="dateInput" mode="popup" pattern="yyyy-MM-dd"
+                        value="#{showBean.dateFilter}"/>
+            <h:commandButton update="shows" class="button-active button"
+                             action="#{showBean.loadList()}"
+                             value="Search" style="margin-left: 5px;"/>
+        </div>
+
         <p:commandButton style="display: flex; justify-items: end; margin-right: 10px; margin-bottom: 10px"
                          action="#{showBean.prepareReservation()}" value="Reserve seat"/>
 

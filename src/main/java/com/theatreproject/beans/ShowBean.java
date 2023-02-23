@@ -10,6 +10,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @ManagedBean
@@ -19,8 +20,9 @@ public class ShowBean implements Serializable {
     private CustomerBean customerBean;
     private List<Show> allShows;
     private Show show;
-
+    private Date dateFilter;
     public ShowBean() {
+//        dateFilter = new Date();
     }
 
     @PostConstruct
@@ -51,13 +53,23 @@ public class ShowBean implements Serializable {
     public void setShow(Show show) {
         this.show = show;
     }
+    public Date getDateFilter() {
+        return dateFilter;
+    }
+    public void setDateFilter(Date dateFilter) {
+        this.dateFilter = dateFilter;
+    }
 
     public Integer getFreeSeats() {
         return show.getHall().getTotalseats().intValue() - show.getSeatsoccupied().intValue();
     }
 
     public void loadList() {
-        allShows = ShowControllerImpl.getInstance().index();
+        if(dateFilter != null) {
+            allShows = ShowControllerImpl.getInstance().index(dateFilter);
+        } else {
+            allShows = ShowControllerImpl.getInstance().index();
+        }
     }
 
     public String prepareReservation() {

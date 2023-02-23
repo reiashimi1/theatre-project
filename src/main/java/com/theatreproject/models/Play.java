@@ -78,17 +78,16 @@ public class Play {
         return actorPlays;
     }
 
-    public String getActorsString() {
-        List<Actor> actors = ActorControllerImpl.getInstance().index(playid);
-
-        return actors.stream().map((actor -> actor.getActorname()))
-                .collect(Collectors.joining(","));
-    }
-
     public void setActorPlays(List<ActorPlay> actorPlays) {
         this.actorPlays = actorPlays;
     }
 
+    public String getActorsString() {
+        List<Actor> actors = ActorControllerImpl.getInstance().index(playid);
+
+        return actors.stream().map((actor -> actor.getActorname()))
+                .collect(Collectors.joining(", "));
+    }
 
     @Override
     public boolean equals(Object o) {

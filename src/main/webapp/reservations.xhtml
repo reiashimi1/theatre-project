@@ -18,6 +18,15 @@
     <h:form>
         <h2 class="title">RESERVATIONS</h2>
 
+        <div style="display: flex; justify-content: center; align-items: center; margin-bottom: 10px">
+            <h:outputText value="Date:"/>
+            <p:calendar inputStyleClass="dateInput" mode="popup" pattern="yyyy-MM-dd"
+                        value="#{reservationBean.filterDate}"/>
+            <h:commandButton update="shows" class="button-active button"
+                             action="#{reservationBean.loadList()}"
+                             value="Search" style="margin-left: 5px;"/>
+        </div>
+
         <p:dataTable id="reservations" var="reservation" value="#{reservationBean.allReservations}"
                      paginator="true" rows="10"
                      resizableColumns="true"

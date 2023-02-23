@@ -1,7 +1,14 @@
 package com.theatreproject.models;
 
+import com.theatreproject.controllers.ActorControllerImpl;
+import com.theatreproject.controllers.ShowControllerImpl;
+import com.theatreproject.utils.Helpers;
+
 import javax.persistence.*;
 import java.math.BigInteger;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "HALLS", schema = "REI")
@@ -25,7 +32,6 @@ public class Hall {
     @Basic
     @Column(name = "TOTALSEATS")
     private BigInteger totalseats;
-
     public BigInteger getHallid() {
         return hallid;
     }
@@ -64,6 +70,16 @@ public class Hall {
 
     public void setTotalseats(BigInteger totalseats) {
         this.totalseats = totalseats;
+    }
+
+    public String getCurrentShows() {
+        List<Show> allShows = ShowControllerImpl.getInstance().index();
+        return allShows.stream()
+                .filter(show -> show.getHall().getHallid().equals(this.hallid))
+//                .filter(show -> Helpers.getInstance().getDateToString(show.getShowdate())
+//                        .equals(Helpers.getInstance().getDateToString(new Date())))
+                .map((show -> show.getPlay().getTitle()))
+                .collect(Collectors.joining(", "));
     }
 
     @Override

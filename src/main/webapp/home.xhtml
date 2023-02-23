@@ -20,11 +20,12 @@
         <div>
             <h2 class="title">HALLS INFORMATION</h2>
         </div>
+
         <p:dataTable id="halls" var="hall" value="#{hallBean.allHalls}"
                      paginator="true" rows="10"
-                     resizableColumns="true"
+                     resizableColumns="true" liveResize="true" liveScroll="true"
                      selection="#{hallBean.hall}" rowKey="#{hall.hallid}"
-
+                     style="table-layout: auto; overflow: scroll; display: flex; flex-direction: column"
                      paginatorTemplate="{CurrentPageReport} {FirstPageLink}
                              {PreviousPageLink} {PageLinks} {NextPageLink}
                              {LastPageLink} {RowsPerPageDropdown}"
@@ -36,7 +37,7 @@
                 <h:outputText value="#{hall.name}"/>
             </p:column>
 
-            <p:column headerText="Columns" sortBy="">
+            <p:column headerText="Columns">
                 <h:outputText value="#{hall.hallcolumns}"/>
             </p:column>
 
@@ -48,65 +49,10 @@
                 <h:outputText value="#{hall.totalseats}"/>
             </p:column>
 
-            <!--            <p:column sortBy="#{record.country.location}" headerText="Country">-->
-            <!--                <h:outputText value="#{record.country.location}"/>-->
-            <!--            </p:column>-->
+            <p:column width="100px" style="display: flex; flex-wrap: wrap" headerText="Current shows">
+                <h:outputText value="#{hall.currentShows}"/>
+            </p:column>
 
-            <!--            <p:column sortBy="#{record.recordID.date}" headerText="Date">-->
-            <!--                <h:outputText value="#{record.recordID.dateToString}"/>-->
-            <!--            </p:column>-->
-
-            <!--            <p:column sortBy="#{record.totalCases}" headerText="Total Cases" visible="false">-->
-            <!--                <h:outputText value="#{record.totalCases}"/>-->
-            <!--            </p:column>-->
-
-            <!--            <p:column sortBy="#{record.newCases}" headerText="New Cases">-->
-            <!--                <h:outputText value="#{record.newCases}"/>-->
-            <!--            </p:column>-->
-
-            <!--            <p:column sortBy="#{record.newCasesSmoothed}" headerText="New Cases Smoothed" visible="false">-->
-            <!--                <h:outputText value="#{record.newCasesSmoothed}"/>-->
-            <!--            </p:column>-->
-
-            <!--            <p:column sortBy="#{record.totalDeaths}" headerText="Total Deaths" visible="false">-->
-            <!--                <h:outputText value="#{record.totalDeaths}"/>-->
-            <!--            </p:column>-->
-
-            <!--            <p:column sortBy="#{record.newDeaths}" headerText="New Deaths">-->
-            <!--                <h:outputText value="#{record.newDeaths}"/>-->
-            <!--            </p:column>-->
-
-            <!--            <p:column sortBy="#{record.newCasesSmoothed}" headerText="New Deaths Smoothed" visible="false">-->
-            <!--                <h:outputText value="#{record.newCasesSmoothed}"/>-->
-            <!--            </p:column>-->
-
-            <!--            <p:column sortBy="#{record.reproductionRate}" headerText="Reproduction Rate" visible="false">-->
-            <!--                <h:outputText value="#{record.reproductionRate}"/>-->
-            <!--            </p:column>-->
-
-            <!--            <p:column sortBy="#{record.newTests}" headerText="New Tests">-->
-            <!--                <h:outputText value="#{record.newTests}"/>-->
-            <!--            </p:column>-->
-
-            <!--            <p:column sortBy="#{record.totalTests}" headerText="Total Tests" visible="false">-->
-            <!--                <h:outputText value="#{record.totalTests}"/>-->
-            <!--            </p:column>-->
-
-            <!--            <p:column sortBy="#{record.stringencyIndex}" headerText="Stringency Index">-->
-            <!--                <h:outputText value="#{record.stringencyIndex}"/>-->
-            <!--            </p:column>-->
-
-            <!--            <p:column sortBy="#{record.population}" headerText="Population">-->
-            <!--                <h:outputText value="#{record.population}"/>-->
-            <!--            </p:column>-->
-
-            <!--            <p:column sortBy="#{record.medianAge}" headerText="Median Age">-->
-            <!--                <h:outputText value="#{record.medianAge}"/>-->
-            <!--            </p:column>-->
-
-            <!--            <p:column sortBy="#{record.newDeathsPerCase}" headerText="New Deaths Per Case" visible="false">-->
-            <!--                <h:outputText value="#{record.newDeathsPerCase}"/>-->
-            <!--            </p:column>-->
         </p:dataTable>
 
     </h:form>
