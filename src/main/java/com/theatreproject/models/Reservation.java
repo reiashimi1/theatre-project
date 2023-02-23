@@ -16,7 +16,8 @@ public class Reservation implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "reservation_sequence")
+    @SequenceGenerator(name="SEQ",sequenceName = "reservation_sequence",allocationSize=1)
+    @GeneratedValue(strategy=GenerationType.IDENTITY, generator="SEQ")
     @Id
     @Column(name = "RESERVATIONID")
     private BigInteger reservationid;
